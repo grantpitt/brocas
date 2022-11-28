@@ -1,0 +1,7 @@
+.env
+__pycache__
+venv
+keys/
+transcripts/BU07a/prep_speech.txt
+transcripts/gpt3/BU07a/stroke_a1.txt
+transcripts/speech2text/BU07a/stroke_a1.txt

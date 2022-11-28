@@ -1,0 +1,4 @@
+@task The following quotes are grammatically incorrect followed by the correct intended quote. Correct the grammar of the incorrect quote
+@exemplar "Walk dog" <I will take the dog for a walk>
+@exemplar "Book book two table" <There are two books on the table>
+@exemplar "test.  I think the Aesthetics are getting better." <

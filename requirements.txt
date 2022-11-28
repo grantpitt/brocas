@@ -1,0 +1,10 @@
+Flask==2.2.1
+deepgram-sdk==0.3.0
+python-dotenv==0.20.0
+aiohttp-wsgi==0.10.0
+openai==0.22.1
+google-cloud-speech==2.15.0
+fastapi==0.79.0
+uvicorn==0.18.1
+pydantic==1.9.1
+python-dotenv==0.20.0
