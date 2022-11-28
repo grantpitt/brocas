@@ -90,6 +90,7 @@ async def my_audio_processor_thread(websocket, audio_chunks):
         return
 
 
+# does this run on wss connection?
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
