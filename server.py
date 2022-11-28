@@ -137,5 +137,5 @@ def predict_route(text: str):
 
 
 if __name__ == "__main__":
-    print("Broca server is running on http://localhost:27622")
-    uvicorn.run("server:app", host="0.0.0.0", port=27622, log_level="info")
+    print("Broca server is running on http://localhost:80")
+    uvicorn.run("server:app", host="0.0.0.0", port=80, log_level="info")
