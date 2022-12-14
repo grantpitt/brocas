@@ -1,6 +1,7 @@
 from google.cloud import speech
 from fastapi import FastAPI, WebSocket, Body
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 from starlette.websockets import WebSocketState
 import uvicorn
 import queue
@@ -107,7 +108,9 @@ async def websocket_endpoint(websocket: WebSocket):
     try:
         while True:
             if not thread.is_alive():
-                raise Exception("thread died (likely gcp text-to-speech timeout (5 min))")
+                raise Exception(
+                    "thread died (likely gcp text-to-speech timeout (5 min))"
+                )
             data = await websocket.receive_bytes()
             audio_chunks.put(data)
     except Exception as e:
@@ -118,12 +121,40 @@ async def websocket_endpoint(websocket: WebSocket):
         print("disconnected")
 
 
+class CleanParams(BaseModel):
+    username: str
+    timestamp: str
+    raw_transcript: str
+
+
+def name_to_filename(name):
+    keepcharacters = (" ", ".", "_")
+    return "".join(c for c in name if c.isalnum() or c in keepcharacters).rstrip()
+
+
 @app.post("/clean")
-def clean(rawTranscript: str = Body(..., embed=True)):
-    print("raw:", rawTranscript)
+def clean(params: CleanParams = Body(...)):
+    print("name:", params.username)
+    print("timestamp:", params.timestamp)
+    print("raw:", params.rawTranscript)
+
+    print("raw:", params.rawTranscript)
     start = time()
-    clean_transcripts = translate(rawTranscript, first=True)
+    clean_transcripts = translate(params.rawTranscript, first=True)
     print("cleaned in:", time() - start)
+
+    # append the transcript and the cleaned transcript to a file
+    filename = name_to_filename(params.username)
+    content = f"""
+
+    timestamp: {params.timestamp}
+    raw: {params.rawTranscript}
+    cleaned: {clean_transcripts}
+
+    """
+    with open(f"transcripts/{filename}.txt", "a") as f:
+        f.write(content)
+
     return {
         "cleaned": clean_transcripts,
     }

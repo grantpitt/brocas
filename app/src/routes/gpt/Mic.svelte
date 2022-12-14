@@ -51,6 +51,7 @@
 
   function onDataAvailable(audioChunk: Blob) {
     if (audioChunk.size > 0 && socket?.readyState === WebSocket.OPEN) {
+      // TODO: Send user and time
       socket.send(audioChunk);
     }
   }

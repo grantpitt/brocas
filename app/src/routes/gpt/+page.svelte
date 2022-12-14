@@ -55,8 +55,11 @@
       headers: {
         "Content-Type": "application/json",
       },
+      // TODO: Send user and time
       body: JSON.stringify({
-        rawTranscript: recentRawTranscript,
+        username: $user,
+        timestamp: time.toLocaleTimeString(),
+        raw_transcript: recentRawTranscript,
       }),
     });
     const result = await responce.json();
