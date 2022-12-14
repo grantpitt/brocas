@@ -136,11 +136,11 @@ def name_to_filename(name):
 def clean(params: CleanParams = Body(...)):
     print("name:", params.username)
     print("timestamp:", params.timestamp)
-    print("raw:", params.rawTranscript)
+    print("raw:", params.raw_transcript)
 
-    print("raw:", params.rawTranscript)
+    print("raw:", params.raw_transcript)
     start = time()
-    clean_transcripts = translate(params.rawTranscript, first=True)
+    clean_transcripts = translate(params.raw_transcript, first=True)
     print("cleaned in:", time() - start)
 
     # append the transcript and the cleaned transcript to a file
@@ -148,7 +148,7 @@ def clean(params: CleanParams = Body(...)):
     content = f"""
 
     timestamp: {params.timestamp}
-    raw: {params.rawTranscript}
+    raw: {params.raw_transcript}
     cleaned: {clean_transcripts}
 
     """
