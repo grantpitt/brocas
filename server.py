@@ -134,14 +134,8 @@ def name_to_filename(name):
 
 @app.post("/clean")
 def clean(params: CleanParams = Body(...)):
-    print("name:", params.username)
-    print("timestamp:", params.timestamp)
-    print("raw:", params.raw_transcript)
-
-    print("raw:", params.raw_transcript)
     start = time()
     clean_transcripts = translate(params.raw_transcript, first=True)
-    print("cleaned in:", time() - start)
 
     # append the transcript and the cleaned transcript to a file
     filename = name_to_filename(params.username)
@@ -152,7 +146,7 @@ def clean(params: CleanParams = Body(...)):
     cleaned: {clean_transcripts}
 
     """
-    with open(f"logs/{filename}.txt", "a+") as f:
+    with open(f"/code/logs/{filename}.txt", "a+") as f:
         f.write(content)
 
     return {
