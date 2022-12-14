@@ -152,7 +152,7 @@ def clean(params: CleanParams = Body(...)):
     cleaned: {clean_transcripts}
 
     """
-    with open(f"transcripts/{filename}.txt", "a+") as f:
+    with open(f"logs/{filename}.txt", "a+") as f:
         f.write(content)
 
     return {
