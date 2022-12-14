@@ -141,11 +141,11 @@ def clean(params: CleanParams = Body(...)):
     filename = name_to_filename(params.username)
     content = f"""
 
-    timestamp: {params.timestamp}
-    raw: {params.raw_transcript}
-    cleaned: {clean_transcripts}
+timestamp: {params.timestamp}
+raw: {params.raw_transcript}
+cleaned: {clean_transcripts}
 
-    """
+"""
     with open(f"/code/logs/{filename}.txt", "a+") as f:
         f.write(content)
 
